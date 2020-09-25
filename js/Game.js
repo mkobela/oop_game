@@ -12,14 +12,14 @@
 */
 class Game {
   constructor() {
-    this.missed = 0;
-    this.phrases = ['Got Milk',
-      'You Win',
-      'Mad Cow',
-      'Fun Day',
-      'Run Fast'];
+    this.phrases = [new Phrase('Got Milk'),
+      new Phrase('You Win'),
+      new Phrase( 'Mad Cow'),
+      new Phrase( 'Fun Day'),
+      new Phrase( 'Run Fast')];
 
-    this.activePhrase;
+    this.missed = 0;
+    this.activePhrase = null;
   }
 
   /***
@@ -57,7 +57,7 @@ class Game {
       overlay.style.display = '';
 
       this.resetGame();
-    }, 1000, isWinner);
+    }, 500, isWinner);
   }
 
   /***
@@ -69,7 +69,7 @@ class Game {
     let randomNumber = Math.floor(Math.random() * this.phrases.length);
 
     // retrun a new phrase object
-    return new Phrase(this.phrases[randomNumber]);
+    return this.phrases[randomNumber];
   }
 
   /***
@@ -90,10 +90,6 @@ class Game {
       // no matching letter
       target.classList.add('wrong');
       this.removeLife();
-
-      if (this.missed >= 5) {
-        this.gameOver(false);
-      }
     }
 
     // disable the keyboard button
@@ -116,6 +112,11 @@ class Game {
         this.missed++;
         break;
       }
+    }
+
+    // check if game is over
+    if (this.missed >= 5) {
+      this.gameOver(false);
     }
   }
 
