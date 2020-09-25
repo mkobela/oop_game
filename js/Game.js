@@ -13,15 +13,11 @@
 class Game {
   constructor() {
     this.missed = 0;
-    // this.phrases = ['Way To Go',
-    //   'You Win',
-    //   'Mad Cat',
-    //   'Sad Horse',
-    //   'Brown Fish'];
-
-    this.phrases = ['Ph One',
-      'Ph On'
-    ];
+    this.phrases = ['Way To Go',
+      'You Win',
+      'Mad Cow',
+      'Fun Day',
+      'Run Fast'];
 
     this.activePhrase;
   }
@@ -61,7 +57,7 @@ class Game {
       overlay.style.display = '';
 
       this.resetGame();
-    }, 200, isWinner);
+    }, 1000, isWinner);
   }
 
   /***
