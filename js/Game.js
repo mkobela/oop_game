@@ -13,7 +13,7 @@
 class Game {
   constructor() {
     this.missed = 0;
-    this.phrases = ['Way To Go',
+    this.phrases = ['Got Milk',
       'You Win',
       'Mad Cow',
       'Fun Day',
