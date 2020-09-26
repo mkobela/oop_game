@@ -22,10 +22,7 @@ class Phrase {
     let displayElement = ``;
 
     // loop for each letter in phrase
-    for( let i = 0; i < this.phrase.length; i++){
-      
-      // get each letter
-      const letter = this.phrase.charAt(i);
+    for(let letter of this.phrase){
       if(letter === ' '){
         // this is a space
         displayElement += `<li class="space"> </li>`;
@@ -46,10 +43,7 @@ class Phrase {
   ***/
   checkLetter(letter){
     // check if letter is in phase
-    if(this.phrase.includes(letter)){
-      return true;
-    }
-    return false;
+     return this.phrase.includes(letter);
   }
 
   /***

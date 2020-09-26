@@ -12,20 +12,27 @@
 */
 class Game {
   constructor() {
-    this.phrases = [new Phrase('Got Milk'),
-      new Phrase('You Win'),
-      new Phrase( 'Mad Cow'),
-      new Phrase( 'Fun Day'),
-      new Phrase( 'Run Fast')];
-
     this.missed = 0;
+    this.phrases = this.createPhrases();
     this.activePhrase = null;
+  }
+
+  createPhrases() {
+    return [new Phrase('Got Milk'),
+    new Phrase('You Win'),
+    new Phrase('Mad Cow'),
+    new Phrase('Fun Day'),
+    new Phrase('Run Fast')];
   }
 
   /***
    * @method startGame - start of game
   ***/
   startGame() {
+    // add keyboard listener, remove when game is over
+    const body = document.querySelector('body');
+    body.addEventListener('keyup', this.handleKeyUp);
+
     // hide the start overlay
     const overlay = document.querySelector('#overlay');
     overlay.style.display = 'none';
@@ -55,6 +62,10 @@ class Game {
 
       // show the start overlay
       overlay.style.display = '';
+
+      // remove keyboard event listener
+      const body = document.querySelector('body');
+      body.removeEventListener('keyup', this.handleKeyUp);
 
       this.resetGame();
     }, 500, isWinner);
@@ -115,7 +126,7 @@ class Game {
     }
 
     // check if game is over
-    if (this.missed >= 5) {
+    if (this.missed >= olItems.length) {
       this.gameOver(false);
     }
   }
@@ -158,9 +169,25 @@ class Game {
 
     // reset heart images
     const olItems = document.querySelectorAll('#scoreboard li');
-
     for (let i = 0; i < olItems.length; i++) {
       olItems[i].firstChild.src = "images/liveHeart.png";
+    }
+  }
+
+  /***
+   * @method  handleKeyUp - processes keyboard clicks
+  ***/
+  handleKeyUp(e) {
+    // check for valid keyboard letter
+    if (e.keyCode > 64 && e.keyCode < 91) {
+      // convert decimal to letter
+      const letter = String.fromCharCode(e.keyCode);
+
+      // lookup button by tag and attribute
+      const key = document.querySelector(`button[${letter}]`);
+
+      // now click keyboard
+      key.click();
     }
   }
 }

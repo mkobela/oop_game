@@ -34,24 +34,6 @@ function handleQwerty(event) {
   }
 }
 
-/***
-  * @function  handleKeyUp - processes keyboard clicks
-***/
-function handleKeyUp(e){
-  // check for valid keyboard letter
-  if(e.keyCode > 64 && e.keyCode < 91){
-    // convert decimal to letter
-    const letter = String.fromCharCode(e.keyCode);
-
-    // lookup button by tag and attribute
-    const key = document.querySelector(`button[${letter}]`);
-
-    // now click keyboard
-    key.click();
-  }
-
-}
-
 // add handler to Start button
 const startButton = document.getElementById('btn__reset');
 startButton.addEventListener('click', handleStartBtn);
@@ -59,6 +41,3 @@ startButton.addEventListener('click', handleStartBtn);
 // add handler to qwerty keyboard
 const qwertyDiv = document.getElementById('qwerty');
 qwertyDiv.addEventListener('click', handleQwerty);
-
-const body = document.querySelector('body');
-body.addEventListener('keyup', handleKeyUp);
